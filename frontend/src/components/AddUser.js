@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Banner from "./Banner";
 
+require('dotenv').config();
+const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL
+
 const AddUser = () => {
   useEffect(() => {
     document.title = 'Cilist - Add User';
@@ -16,7 +19,7 @@ const AddUser = () => {
   const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/users", {
+      await axios.post(`${BACKEND_BASE_URL}/users`, {
         name,
         email,
         gender,
