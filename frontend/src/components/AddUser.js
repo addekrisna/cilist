@@ -3,8 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Banner from "./Banner";
 
-require('dotenv').config();
-const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL
+const {REACT_APP_BACKEND_BASE_URL} = process.env;
 
 const AddUser = () => {
   useEffect(() => {
@@ -19,7 +18,7 @@ const AddUser = () => {
   const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${BACKEND_BASE_URL}/users`, {
+      await axios.post(`${REACT_APP_BACKEND_BASE_URL}/users`, {
         name,
         email,
         gender,

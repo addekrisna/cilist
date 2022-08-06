@@ -15,7 +15,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      DATABASE_HOST: db
+      REACT_APP_DATABASE_HOST: db
     ports:
       - "5000:5000"
     depends_on:
@@ -27,6 +27,6 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     environment:
-      BACKEND_BASE_URL: http://localhost:3000
+      REACT_APP_BACKEND_BASE_URL: http://localhost:5000
     ports:
       - "3000:3000"
