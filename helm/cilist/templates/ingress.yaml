@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aws-ingress-frontend
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"    
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  #ingressClassName: nginx-frontend
+  rules:
+    - host: {{ .Values.host.frontend}}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.svc.frontend}}
+                port:
+                  number: 80
+  tls:
+    - secretName: test-tls
+      hosts:
+      - {{ .Values.host.frontend}}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aws-ingress-backend
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"   
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  #ingressClassName: nginx-backend
+  rules:
+    - host: {{ .Values.host.backend}}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.svc.backend}}
+                port:
+                  number: 80
+  tls:
+    - secretName: test-tls
+      hosts:
+      - {{ .Values.host.backend}}

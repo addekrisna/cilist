@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name : {{ .Values.svc.frontend}}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector: 
+    app: {{ .Values.deploymentName.frontend}}
+  type: ClusterIP
+  ports:
+    - port: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name : {{ .Values.svc.backend}}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector: 
+    app: {{ .Values.deploymentName.backend}}
+  type: ClusterIP
+  ports:
+    - port: 5000
+
+
+
