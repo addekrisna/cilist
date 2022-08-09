@@ -18,8 +18,8 @@ spec:
         - name: {{ .Values.containersName.frontend}}
           image: {{ .Values.image.frontend}}
           env:
-          - name: {{ .Value.envfe.name }}
-            value: {{ .Value.envfe.value }}
+          - name: {{ .Values.envfe.name }}
+            value: {{ .Values.envfe.value }}
 ---
 apiVersion: apps/v1
 kind: Deployment 
@@ -41,5 +41,5 @@ spec:
         - name: {{ .Values.containersName.backend}}
           image: {{ .Values.image.backend}}
           env:
-          - name: {{ .Value.envbe.name }}
-            value: {{ .Value.envbe.value }}
+          - name: {{ .Values.envbe.name }}
+            value: {{ .Values.envbe.value }}
