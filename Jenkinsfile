@@ -59,8 +59,8 @@ pipeline {
                 sh "docker image rmi addekrisna/cilist_frontend:stage-$BUILD_NUMBER"
                 }else{ 
 
-                sh "kubectl -n production set image deployment/web-api addekrisna/cilist_backend:prod-$BUILD_NUMBER"
-                sh "kubectl -n production set image deployment/web-front addekrisna/cilist_frontend:prod-$BUILD_NUMBER"
+                sh "kubectl -n production set image deployment/web-api cilist-backend=addekrisna/cilist_backend:prod-$BUILD_NUMBER"
+                sh "kubectl -n production set image deployment/web-front cilist-frontend=addekrisna/cilist_frontend:prod-$BUILD_NUMBER"
                 sh "docker image rmi addekrisna/cilist_backend:prod-$BUILD_NUMBER"
                 sh "docker image rmi addekrisna/cilist_frontend:prod-$BUILD_NUMBER"
                 }
