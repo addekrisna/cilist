@@ -22,7 +22,7 @@ pipeline {
                 if (env.BRANCH_NAME == "stage")
                 
                 { 
-                sh "pwd $$ ls -lah"
+                sh "pwd && ls -lah"
                 sh "docker build -t addekrisna/cilist_backend:stage-$BUILD_NUMBER -f backend/Dockerfile backend/."
                 sh "docker build -t addekrisna/cilist_frontend:stage-$BUILD_NUMBER -f frontend/Dockerfile frontend/."
 
@@ -31,7 +31,7 @@ pipeline {
 
                 }else{ 
 
-                sh "pwd $$ ls -lah"
+                sh "pwd && ls -lah"
                 sh "docker build -t addekrisna/cilist_backend:prod-$BUILD_NUMBER -f backend/Dockerfile backend/."
                 sh "docker build -t addekrisna/cilist_frontend:prod-$BUILD_NUMBER -f frontend/Dockerfile frontend/."
 
