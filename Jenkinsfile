@@ -23,7 +23,7 @@ pipeline {
                 if (env.BRANCH_NAME == "stage")
                 
                 { 
-                sh "pwd && ls -lah"
+                // sh "pwd && ls -lah"
                 sh "docker build -t addekrisna/cilist_backend:stage-\$(git rev-parse --short HEAD) -f backend/Dockerfile backend/."
                 sh "docker build -t addekrisna/cilist_frontend:stage-\$(git rev-parse --short HEAD) -f frontend/Dockerfile frontend/."
 
