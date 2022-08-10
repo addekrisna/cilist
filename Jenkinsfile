@@ -50,8 +50,6 @@ pipeline {
             steps {
               //
                 script { echo "Testing Deploy Lagi" 
-                
-                
 
                 if (env.BRANCH_NAME == "stage")
                 
