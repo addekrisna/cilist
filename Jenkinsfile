@@ -53,11 +53,13 @@ pipeline {
               //
                 script { echo "Testing Deploy Lagi" 
                 
-                sh "tag=`git rev-parse --short HEAD`"
+                
 
                 if (env.BRANCH_NAME == "stage")
                 
                 { 
+                
+                sh "tag=`git rev-parse --short HEAD`"
 
                 sh "kubectl -n stage set image deployment/web-api cilist-backend=addekrisna/cilist_backend:stage-$tag"
                 sh "kubectl -n stage set image deployment/web-front cilist-frontend=addekrisna/cilist_frontend:stage-$tag"
