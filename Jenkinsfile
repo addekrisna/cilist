@@ -20,7 +20,7 @@ pipeline {
               //
                 script { echo "Build"
 
-                sh "tag='git rev-parse --short HEAD'"
+                sh "tag=$(git rev-parse --short HEAD)"
 
                 if (env.BRANCH_NAME == "stage")
                 
@@ -53,7 +53,7 @@ pipeline {
               //
                 script { echo "Testing Deploy Lagi" 
                 
-                sh "tag='git rev-parse --short HEAD'"
+                sh "tag=$(git rev-parse --short HEAD)"
 
                 if (env.BRANCH_NAME == "stage")
                 
