@@ -2,28 +2,6 @@ properties([pipelineTriggers([githubPush()])])
 pipeline {
     agent any
     stages {
-        stage('Build') {
-          agent { label "agent1" }
-            steps {
-              //
-                script { echo "Build"
-                if (env.BRANCH_NAME == "stage")
-                
-                { 
-                sh "docker build -t addekrisna/landingpage:stage-$BUILD_NUMBER . "
-                sh "docker push addekrisna/landingpage:stage-$BUILD_NUMBER"
-
-                }else{ 
-                sh "docker build -t addekrisna/landingpage:prod-$BUILD_NUMBER . "
-                sh "docker push addekrisna/landingpage:prod-$BUILD_NUMBER"
-                
-                }
-                
-                
-                }
-                
-              }
-            }
         stage('Test') {
           agent { label "agent1" }
             steps {
@@ -36,6 +14,36 @@ pipeline {
                 }
               }
             }
+        stage('Build') {
+          agent { label "agent1" }
+            steps {
+              //
+                script { echo "Build"
+                if (env.BRANCH_NAME == "stage")
+                
+                { 
+                sh "pwd $$ ls -lah"
+                sh "docker build -t addekrisna/cilist_backend:stage-$BUILD_NUMBER -f backend/Dockerfile backend/."
+                sh "docker build -t addekrisna/cilist_frontend:stage-$BUILD_NUMBER -f frontend/Dockerfile frontend/."
+
+                sh "docker push addekrisna/cilist_backend:stage-$BUILD_NUMBER"
+                sh "docker push addekrisna/cilist_frontend:stage-$BUILD_NUMBER"
+
+                }else{ 
+
+                sh "pwd $$ ls -lah"
+                sh "docker build -t addekrisna/cilist_backend:prod-$BUILD_NUMBER -f backend/Dockerfile backend/."
+                sh "docker build -t addekrisna/cilist_frontend:prod-$BUILD_NUMBER -f frontend/Dockerfile frontend/."
+
+                sh "docker push addekrisna/cilist_backend:prod-$BUILD_NUMBER"
+                sh "docker push addekrisna/cilist_frontend:prod-$BUILD_NUMBER"
+                
+                }
+                
+                }
+                
+              }
+            }
         stage('Deploy') {
           agent { label "agent1" }
             steps {
@@ -45,11 +53,16 @@ pipeline {
                 if (env.BRANCH_NAME == "stage")
                 
                 { 
-                sh "kubectl -n test-lp set image deployment/landingpage-deployment landingpage=addekrisna/landingpage:stage-$BUILD_NUMBER"
-                sh "docker image rmi addekrisna/landingpage:stage-$BUILD_NUMBER"
+                sh "kubectl -n stage set image deployment/web-api addekrisna/cilist_backend:stage-$BUILD_NUMBER"
+                sh "kubectl -n stage set image deployment/web-front addekrisna/cilist_frontend:stage-$BUILD_NUMBER"
+                sh "docker image rmi addekrisna/cilist_backend:stage-$BUILD_NUMBER"
+                sh "docker image rmi addekrisna/cilist_frontend:stage-$BUILD_NUMBER"
                 }else{ 
-                sh "kubectl -n test-lp set image deployment/landingpage-deployment landingpage=addekrisna/landingpage:prod-$BUILD_NUMBER"
-                sh "docker image rmi addekrisna/landingpage:prod-$BUILD_NUMBER"
+
+                sh "kubectl -n production set image deployment/web-api addekrisna/cilist_backend:prod-$BUILD_NUMBER"
+                sh "kubectl -n production set image deployment/web-front addekrisna/cilist_frontend:prod-$BUILD_NUMBER"
+                sh "docker image rmi addekrisna/cilist_backend:prod-$BUILD_NUMBER"
+                sh "docker image rmi addekrisna/cilist_frontend:prod-$BUILD_NUMBER"
                 }
 
                 }
