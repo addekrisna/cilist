@@ -53,8 +53,8 @@ pipeline {
                 if (env.BRANCH_NAME == "stage")
                 
                 { 
-                sh "kubectl -n stage set image deployment/web-api addekrisna/cilist_backend:stage-$BUILD_NUMBER"
-                sh "kubectl -n stage set image deployment/web-front addekrisna/cilist_frontend:stage-$BUILD_NUMBER"
+                sh "kubectl -n stage set image deployment/web-api cilist-backend=addekrisna/cilist_backend:stage-$BUILD_NUMBER"
+                sh "kubectl -n stage set image deployment/web-front cilist-frontend=addekrisna/cilist_frontend:stage-$BUILD_NUMBER"
                 sh "docker image rmi addekrisna/cilist_backend:stage-$BUILD_NUMBER"
                 sh "docker image rmi addekrisna/cilist_frontend:stage-$BUILD_NUMBER"
                 }else{ 
