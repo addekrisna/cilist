@@ -4,8 +4,8 @@ metadata:
   name: {{ .Values.hpa.frontend }}
   namespace: {{ .Values.namespace }}
 spec:
-  minReplicas: {{ .Values.hpa.minReplicas }}
-  maxReplicas: {{ .Values.hpa.maxReplicas }}
+  minReplicas: {{ .Values.hpa.feMinReplicas }}
+  maxReplicas: {{ .Values.hpa.feMaxReplicas }}
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
@@ -16,13 +16,13 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: {{ .Values.hpa.cpuThresold }}
+          averageUtilization: {{ .Values.hpa.feCpuThresold }}
     # - type: Resource
     #   resource:
     #     name: memory
     #     target:
     #       type: Utilization
-    #       averageUtilization: {{ .Values.hpa.memThresold }}
+    #       averageUtilization: {{ .Values.hpa.feMemThresold }}
 ---
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
@@ -30,8 +30,8 @@ metadata:
   name: {{ .Values.hpa.backend }}
   namespace: {{ .Values.namespace }}
 spec:
-  minReplicas: {{ .Values.hpa.minReplicas }}
-  maxReplicas: {{ .Values.hpa.maxReplicas }}
+  minReplicas: {{ .Values.hpa.beMinReplicas }}
+  maxReplicas: {{ .Values.hpa.beMaxReplicas }}
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
@@ -42,10 +42,10 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: {{ .Values.hpa.cpuThresold }}
+          averageUtilization: {{ .Values.hpa.beCpuThresold }}
     # - type: Resource
     #   resource:
     #     name: memory
     #     target:
     #       type: Utilization
-    #       averageUtilization: {{ .Values.hpa.memThresold }}
+    #       averageUtilization: {{ .Values.hpa.beMemThresold }}

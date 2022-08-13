@@ -35,7 +35,13 @@ host:
   frontend: ""
   backend: ""
 
-resources:
+feResources:
+  cpuRequest: ""
+  cpuLimit: ""
+  memRequest: ""
+  memLimit: ""
+
+beResources:
   cpuRequest: ""
   cpuLimit: ""
   memRequest: ""
@@ -43,8 +49,13 @@ resources:
 
 hpa:
   frontend: ""
+  feMinReplicas: 1
+  feMaxReplicas: 5
+  feCpuThresold: 70
+  feMemThresold: 70
+
   backend: ""
-  minReplicas: 1
-  maxReplicas: 5
-  cpuThresold: 70
-  memThresold: 70
+  beMinReplicas: 1
+  beMaxReplicas: 5
+  beCpuThresold: 70
+  beMemThresold: 70
