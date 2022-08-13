@@ -52,8 +52,8 @@ spec:
             value: {{ .Values.envbe.value }}
           resources:
             requests:
-              # memory: "50Mi"
-              cpu: 200m
+              # memory: {{ .Values.resources.memRequest }}
+              cpu: {{ .Values.resources.cpuRequest }}
             limits:
-              # memory: "50Mi"
-              cpu: 500m
+              # memory: {{ .Values.resources.memLimit }}
+              cpu: {{ .Values.resources.cpuLimit }}
