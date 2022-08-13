@@ -34,3 +34,17 @@ svc:
 host:
   frontend: ""
   backend: ""
+
+resources:
+  cpuRequest: ""
+  cpuLimit: ""
+  memRequest: ""
+  memLimit: ""
+
+hpa:
+  frontend: ""
+  backend: ""
+  minReplicas: 1
+  maxReplicas: 5
+  cpuThresold: 70
+  memThresold: 70
