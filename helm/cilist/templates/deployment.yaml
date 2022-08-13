@@ -20,6 +20,13 @@ spec:
           env:
           - name: {{ .Values.envfe.name }}
             value: {{ .Values.envfe.value }}
+          resources:
+            requests:
+              # memory: {{ .Values.resources.memRequest }}
+              cpu: {{ .Values.resources.cpuRequest }}
+            limits:
+              # memory: {{ .Values.resources.memLimit }}
+              cpu: {{ .Values.resources.cpuLimit }}     
 ---
 apiVersion: apps/v1
 kind: Deployment 
@@ -43,3 +50,10 @@ spec:
           env:
           - name: {{ .Values.envbe.name }}
             value: {{ .Values.envbe.value }}
+          resources:
+            requests:
+              # memory: {{ .Values.resources.memRequest }}
+              cpu: {{ .Values.resources.cpuRequest }}
+            limits:
+              # memory: {{ .Values.resources.memLimit }}
+              cpu: {{ .Values.resources.cpuLimit }}
