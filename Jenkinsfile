@@ -2,7 +2,7 @@ properties([pipelineTriggers([githubPush()])])
 pipeline {
     agent any
     stages {
-        stage('Test') {
+        stage('Code Scanning') {
           agent { label "agent1" }
             steps {
               //

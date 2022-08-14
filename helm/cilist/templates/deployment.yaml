@@ -22,11 +22,11 @@ spec:
             value: {{ .Values.envfe.value }}
           resources:
             requests:
-              # memory: {{ .Values.resources.memRequest }}
-              cpu: {{ .Values.resources.cpuRequest }}
+              # memory: {{ .Values.feResources.memRequest }}
+              cpu: {{ .Values.feResources.cpuRequest }}
             limits:
-              # memory: {{ .Values.resources.memLimit }}
-              cpu: {{ .Values.resources.cpuLimit }}     
+              # memory: {{ .Values.feResources.memLimit }}
+              cpu: {{ .Values.feResources.cpuLimit }}     
 ---
 apiVersion: apps/v1
 kind: Deployment 
@@ -52,8 +52,8 @@ spec:
             value: {{ .Values.envbe.value }}
           resources:
             requests:
-              # memory: {{ .Values.resources.memRequest }}
-              cpu: {{ .Values.resources.cpuRequest }}
+              # memory: {{ .Values.beResources.memRequest }}
+              cpu: {{ .Values.beResources.cpuRequest }}
             limits:
-              # memory: {{ .Values.resources.memLimit }}
-              cpu: {{ .Values.resources.cpuLimit }}
+              # memory: {{ .Values.beResources.memLimit }}
+              cpu: {{ .Values.beResources.cpuLimit }}
